@@ -31,4 +31,3 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Image2VideoApp
-          path: Image2VideoApp.zip
