@@ -1,9 +1,6 @@
 name: Build EXE
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -11,22 +8,22 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
       - name: Build EXE with PyInstaller
-        run: pyinstaller --onefile app.py
+        run: pyinstaller --onefile --noconsole --add-data "requirements.txt;." app.py -n Image2VideoApp
 
-      - name: Upload EXE artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Image2VideoApp
-          path: dist/app.exe
+          path: dist/Image2VideoApp.exe
